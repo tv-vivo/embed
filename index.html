@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #333;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input, button, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4facfe;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #00f2fe;
+    }
+
+    textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    .copy-btn {
+      margin-top: 10px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Generador de Enlaces Atob</h1>
+    <input id="input-url" type="text" placeholder="Introduce la URL para codificar" />
+    <button onclick="generateLink()">Generar Enlace</button>
+    <textarea id="output-url" readonly placeholder="El enlace generado aparecerá aquí"></textarea>
+    <button class="copy-btn" onclick="copyToClipboard()">Copiar Enlace</button>
+    <div class="footer">Genera un enlace encriptado para: <strong>https://embed-pro.blogspot.com</strong></div>
+  </div>
+
+  <script>
+    const baseEmbedUrl = "https://embed-pro.blogspot.com/2025/01/embed.html?r=";
+
+    function generateLink() {
+      const inputUrl = document.getElementById("input-url").value.trim();
+      if (!inputUrl) {
+        alert("Por favor, introduce una URL válida.");
+        return;
+      }
+
+      try {
+        const encodedUrl = btoa(inputUrl);
+        const fullLink = baseEmbedUrl + encodedUrl;
+        document.getElementById("output-url").value = fullLink;
+      } catch (e) {
+        alert("Error al codificar la URL. Asegúrate de que sea válida.");
+      }
+    }
+
+    function copyToClipboard() {
+      const outputUrl = document.getElementById("output-url");
+      if (outputUrl.value) {
+        outputUrl.select();
+        document.execCommand("copy");
+        alert("¡Enlace copiado al portapapeles!");
+      } else {
+        alert("No hay ningún enlace para copiar.");
+      }
+    }
+  </script>
+</body>
+</html>
