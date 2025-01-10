@@ -90,7 +90,7 @@
       }
 
       try {
-        const encodedUrl = btoa(inputUrl);
+        const encodedUrl = btoa("https://iplayerhls.com/e/" + inputUrl);
         const fullLink = baseEmbedUrl + encodedUrl;
         document.getElementById("output-url").value = fullLink;
       } catch (e) {
